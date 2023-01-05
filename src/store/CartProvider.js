@@ -53,7 +53,6 @@ const CartProvider = (props) => {
 		defaultCartState
 	);
 	const addItemToCartHandler = (item) => {
-		console.log(item, cartState);
 		const found = cartState.items.find(({ id }) => id === item.id);
 
 		if (!found) {
