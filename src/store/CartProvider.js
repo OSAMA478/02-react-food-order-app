@@ -27,11 +27,15 @@ const cartReducer = (state, action) => {
 			...found,
 			amount: found.amount - 1,
 		};
-
-		const updatedItems = [
-			...state.items.filter(({ id }) => id !== action.id),
-			itemToRemove,
-		];
+		let updatedItems;
+		if (itemToRemove.amount < 1) {
+			updatedItems = [...state.items.filter(({ id }) => id !== action.id)];
+		} else {
+			updatedItems = [
+				...state.items.filter(({ id }) => id !== action.id),
+				itemToRemove,
+			];
+		}
 		const updatedTotalAmount = updatedItems.reduce((acc, item) => {
 			return acc + item.price * item.amount;
 		}, 0);
@@ -67,7 +71,7 @@ const CartProvider = (props) => {
 	};
 
 	const cartContext = {
-		items: cartState.items,
+		items: cartState.items.sort((a, b) => a.price - b.price),
 		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemToCartHandler,
