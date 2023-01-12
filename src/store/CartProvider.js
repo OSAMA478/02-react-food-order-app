@@ -69,11 +69,16 @@ const CartProvider = (props) => {
 		dispatchCartAction({ type: "REMOVE_ITEM", id: id });
 	};
 
+	const clearCartHandler = () => {
+		dispatchCartAction({ type: "clear" });
+	};
+
 	const cartContext = {
 		items: cartState.items.sort((a, b) => a.price - b.price),
 		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemToCartHandler,
+		clearCart: clearCartHandler,
 	};
 	return (
 		<CartContext.Provider value={cartContext}>
