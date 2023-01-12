@@ -27,6 +27,9 @@ const Cart = (props) => {
 	const orderHandler = () => {
 		setIsCheckout(true);
 	};
+	const backHandler = () => {
+		setIsCheckout(false);
+	};
 
 	const confirmHandler = async (userData) => {
 		setIsSubmitting(true);
@@ -59,7 +62,7 @@ const Cart = (props) => {
 
 	const carModalContent = (
 		<React.Fragment>
-			{cartItem}
+			{!isCheckout && cartItem}
 			<div className={classes.total}>
 				<span>Total Amount</span>
 				<span>{totalAmount}</span>
@@ -77,7 +80,12 @@ const Cart = (props) => {
 				)}
 			</div>
 			{isCheckout && (
-				<Checkout onConfirm={confirmHandler} onCancel={props.onClick} />
+				<Checkout
+					onBack={backHandler}
+					isCheckout={isCheckout}
+					onConfirm={confirmHandler}
+					onCancel={props.onClick}
+				/>
 			)}
 		</React.Fragment>
 	);
