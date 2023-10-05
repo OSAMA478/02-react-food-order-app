@@ -38,7 +38,7 @@ export const AvailableMeals = () => {
 		const fetchData = async () => {
 			setIsLoading(true);
 			const response = await fetch(
-				"https://food-order-app-c9bf6-default-rtdb.firebaseio.com/meals.json"
+				"https://food-order-app-6526c-default-rtdb.firebaseio.com/meals.json"
 			);
 
 			console.log(response);
